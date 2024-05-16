@@ -16,5 +16,37 @@ This project is a panel application for Ludi Company. It provides an interface t
 
 ### Step 1: Clone the Repository
 ```sh
-git clone https://github.com/your-username/Ludi-Company-Panel.git
+git clone https://github.com/umutdmr/Ludi-Company-Panel.git
 cd Ludi-Company-Panel
+```
+
+### Step 2: Create a Virtual Environment
+Create a virtual environment using `venv`:
+```sh
+python3 -m venv env
+```
+
+### Step 3: Activate the Virtual Environment
+Activate the virtual environment:
+- On macOS/Linux:
+  ```sh
+  source env/bin/activate
+  ```
+- On Windows:
+  ```sh
+  .\env\Scripts\activate
+  ```
+
+### Step 4: Install the Requirements
+Install the required packages using `pip`:
+```sh
+pip install -r requirements.txt
+```
+
+### Step 5: Run the Project
+Run the project using `python`:
+```sh
+python3 main.py
+```
+
+
