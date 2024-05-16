@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludi Panel</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 90%;
+            height: 500px;
+            margin: auto;
+        }
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Company User Data</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Number of Users</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for company, users in company_response.items() %}
+                <tr>
+                    <td>{{ company }}</td>
+                    <td>{{ users }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </br>
+    </br>
+    </br>
+        <h2>Total Users in Ludi</h2>
+        <div class="chart-container">
+            <canvas id="ludiChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('ludiChart').getContext('2d');
+            const data = {{ users_response|tojson|safe }};
+            const ludiChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.dates,
+                    datasets: [{
+                        label: 'Total Users',
+                        data: data.counts,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Users'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
